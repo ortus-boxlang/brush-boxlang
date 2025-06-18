@@ -43,7 +43,13 @@ function BoxLangBrush() {
     // Template syntax components (bx: prefixed)
     var templateComponents = 'argument function set return if else elseif try catch finally import while break continue include property rethrow throw switch case defaultcase output query';
 
+	// Variable Scopes
+	var variableScopes = 'application arguments attributes caller client cgi form local request server session url thread variables';
+
     this.regexList = [
+		// BoxLang Variable Scopes
+		{ regex: new RegExp('\\b(' + variableScopes.replace(/\s+/g, '|') + ')\\b', 'gmi'), css: 'color7' },
+
       // Comments
       { regex: new RegExp('//.*$', 'gm'),                               css: 'comments' },     // single line comments
       { regex: new RegExp('/\\*[\\s\\S]*?\\*/', 'gm'),                 css: 'comments' },     // multi-line comments
