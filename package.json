@@ -1,0 +1,46 @@
+{
+  "name": "brush-boxlang",
+  "version": "1.0.0",
+  "description": "BoxLang brush module for SyntaxHighlighter.",
+  "keywords": [
+    "syntaxhighlighter",
+    "brush",
+    "boxlang"
+  ],
+  "homepage": "https://github.com/ortus-boxlang/brush-boxlang",
+  "bugs": "https://github.com/ortus-boxlang/brush-boxlang/issues",
+  "author": {
+    "name": "Luis Majano",
+    "url": "https://github.com/lmajano"
+  },
+  "main": "brush-boxlang.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ortus-boxlang/brush-boxlang.git"
+  },
+  "scripts": {
+    "test": "babel-node --only='syntaxhighlighter-*,brush-*' node_modules/.bin/_mocha --opts mocha.opts test.js"
+  },
+  "dependencies": {
+    "brush-base": "^4.0.0",
+    "syntaxhighlighter-regex": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-core": "^6.1.21",
+    "babel-preset-es2015": "^6.1.18",
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "syntaxhighlighter-match": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=4",
+    "npm": ">=2"
+  },
+  "license": "Apache-2.0",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}
