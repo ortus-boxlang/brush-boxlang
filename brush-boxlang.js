@@ -70,27 +70,27 @@
       { regex: new RegExp('#[^#]*#', 'g'),                             css: 'color2' },       // #variable# interpolation
 
       // BoxLang template components (bx:)
-      { regex: new RegExp('</?bx:(' + templateComponents + ')\\b', 'gmi'), css: 'keyword' },  // bx: template tags
-      { regex: new RegExp('\\bbx:(' + templateComponents + ')\\b', 'gmi'),  css: 'keyword' }, // bx: in code
+      { regex: new RegExp('</?bx:(' + templateComponents.replace(/\s+/g, '|') + ')\\b', 'gmi'), css: 'keyword' },  // bx: template tags
+      { regex: new RegExp('\\bbx:(' + templateComponents.replace(/\s+/g, '|') + ')\\b', 'gmi'),  css: 'keyword' }, // bx: in code
 
       // Keywords (highest priority for language constructs)
-      { regex: new RegExp('\\b(' + keywords + ')\\b', 'gmi'),          css: 'keyword' },      // language keywords
+      { regex: new RegExp('\\b(' + keywords.replace(/\s+/g, '|') + ')\\b', 'gmi'),          css: 'keyword' },      // language keywords
 
       // Modifiers
-      { regex: new RegExp('\\b(' + modifiers + ')\\b', 'gmi'),         css: 'color1' },       // access modifiers
+      { regex: new RegExp('\\b(' + modifiers.replace(/\s+/g, '|') + ')\\b', 'gmi'),         css: 'color1' },       // access modifiers
 
       // Built-in Functions
-      { regex: new RegExp('\\b(' + functions + ')\\s*\\(', 'gmi'),     css: 'functions' },    // function calls
+      { regex: new RegExp('\\b(' + functions.replace(/\s+/g, '|') + ')\\s*\\(', 'gmi'),     css: 'functions' },    // function calls
 
       // Components
-      { regex: new RegExp('\\b(' + components + ')\\b', 'gmi'),        css: 'color2' },       // components
-      { regex: new RegExp('\\b(' + specialComponents + ')\\b', 'gmi'), css: 'color2' },       // special components
+      { regex: new RegExp('\\b(' + components.replace(/\s+/g, '|') + ')\\b', 'gmi'),        css: 'color2' },       // components
+      { regex: new RegExp('\\b(' + specialComponents.replace(/\s+/g, '|') + ')\\b', 'gmi'), css: 'color2' },       // special components
 
       // Operators
-      { regex: new RegExp('\\b(' + operators + ')\\b', 'gmi'),         css: 'color1' },       // operators
+      { regex: new RegExp('\\b(' + operators.replace(/\s+/g, '|') + ')\\b', 'gmi'),         css: 'color1' },       // operators
 
       // Boolean values
-      { regex: new RegExp('\\b(' + booleans + ')\\b', 'gmi'),          css: 'color3' },       // boolean literals
+      { regex: new RegExp('\\b(' + booleans.replace(/\s+/g, '|') + ')\\b', 'gmi'),          css: 'color3' },       // boolean literals
 
       // Null
       { regex: new RegExp('\\b(' + nullValue + ')\\b', 'gmi'),         css: 'color4' },       // null literal
