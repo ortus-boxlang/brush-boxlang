@@ -16,7 +16,7 @@
   "main": "brush-boxlang.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ortus-boxlang/brush-boxlang.git"
+    "url": "git+https://github.com/ortus-boxlang/brush-boxlang.git"
   },
   "scripts": {
     "test": "NODE_NO_WARNINGS=1 babel-node --ignore=false test.js"
