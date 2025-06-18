@@ -1,30 +1,21 @@
 /**
- * SyntaxHighlighter
- * http://alexgorbatchev.com/SyntaxHighlighter
- *
- * SyntaxHighlighter is donationware. If you are using it, please donate.
- * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
- *
  * This is the Brush for the BoxLang JVM language.
  * More information about BoxLang can be found at:
  * http://boxlang.io
  *
  * @version
- * 3.0.83 (July 02 2010)
+ * 1.0.0
  *
  * @copyright
- * Copyright (C) 2004-2010 Alex Gorbatchev.
+ * Copyright (C) 2025 BoxLang Development Team
  *
  * @license
- * Dual licensed under the MIT and GPL licenses.
+ * Apache-2.0
  */
-;(function()
-{
-  // CommonJS
-  typeof(require) != 'undefined' ? SyntaxHighlighter = require( 'shCore' ).SyntaxHighlighter : null;
+import Brush from 'brush-base';
+import { commonRegExp as regexLib } from 'syntaxhighlighter-regex';
 
-  function Brush()
-  {
+function BoxLangBrush() {
     // BoxLang Keywords from grammar
     var keywords = 'abstract as assert break case castas catch class component continue default do does else final finally for function greater if imp import in include instanceof interface is less lock new package param property private public remote required return static switch than thread throw to transaction try var when while';
 
@@ -59,8 +50,8 @@
       { regex: new RegExp('<!---[\\s\\S]*?--->', 'gm'),               css: 'comments' },     // BoxLang template comments
 
       // Strings
-      { regex: SyntaxHighlighter.regexLib.doubleQuotedString,           css: 'string' },       // double quoted strings
-      { regex: SyntaxHighlighter.regexLib.singleQuotedString,           css: 'string' },       // single quoted strings
+      { regex: regexLib.doubleQuotedString,           css: 'string' },       // double quoted strings
+      { regex: regexLib.singleQuotedString,           css: 'string' },       // single quoted strings
 
       // Numbers
       { regex: new RegExp('\\b\\d+\\.\\d+\\b', 'g'),                   css: 'value' },        // float literals
@@ -108,13 +99,10 @@
       { regex: new RegExp('(\\|\\||&&|\\?:|\\?\\.|\\?\\.)', 'g'),     css: 'color1' },      // logical operators
       { regex: new RegExp('(\\||&|\\^|~|<<|>>|>>>)', 'g'),            css: 'color1' }       // bitwise operators
     ];
-  }
+}
 
-  Brush.prototype = new SyntaxHighlighter.Highlighter();
-  Brush.aliases = [ 'boxlang', 'bx' ];
+BoxLangBrush.prototype = Object.create(Brush.prototype);
+BoxLangBrush.prototype.constructor = BoxLangBrush;
+BoxLangBrush.aliases = ['boxlang', 'bx'];
 
-  SyntaxHighlighter.brushes.BoxLang = Brush;
-
-  // CommonJS
-  typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
-})();
+export default BoxLangBrush;

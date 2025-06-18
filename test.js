@@ -1,9 +1,11 @@
-var chai = require('chai');
-var expect = chai.expect;
+import chai from 'chai';
+import { readFileSync } from 'fs';
 // var match = require('syntaxhighlighter-match');
 
-var Brush = require('./brush-boxlang.js').Brush;
-var sample = require('fs').readFileSync(`${__dirname}/Sample.bx`, 'utf8');
+import BoxLangBrush from './brush-boxlang.js';
+
+const expect = chai.expect;
+const sample = readFileSync(`${__dirname}/Sample.bx`, 'utf8');
 
 console.log('Running tests...');
 
@@ -27,10 +29,10 @@ function before(fn) {
 }
 
 describe('brush-boxlang', function() {
-  var instance = null;
+  let instance = null;
 
   before(function() {
-    instance = new Brush();
+    instance = new BoxLangBrush();
   });
 
   it('has populated code sample', function() {
