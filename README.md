@@ -1,8 +1,8 @@
 # BoxLang Brush
 
-[![GratiPay](https://img.shields.io/gratipay/user/alexgorbatchev.svg)](https://gratipay.com/alexgorbatchev/)
 ![Downloads](https://img.shields.io/npm/dm/brush-boxlang.svg)
 ![Version](https://img.shields.io/npm/v/brush-boxlang.svg)
+![License](https://img.shields.io/npm/l/brush-boxlang.svg)
 
 BoxLang brush module for [SyntaxHighlighter](https://github.com/syntaxhighlighter/syntaxhighlighter).
 
