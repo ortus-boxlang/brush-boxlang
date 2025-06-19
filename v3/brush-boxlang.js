@@ -12,10 +12,13 @@
  * @license
  * Apache-2.0
  */
-import Brush from 'brush-base';
-import { commonRegExp as regexLib } from 'syntaxhighlighter-regex';
+;(function()
+{
+  // CommonJS
+  typeof(require) != 'undefined' ? SyntaxHighlighter = require( 'shCore' ).SyntaxHighlighter : null;
 
-function BoxLangBrush() {
+  function Brush()
+  {
     // BoxLang Keywords from grammar
     var keywords = 'argumentCollection attributeCollection abstract as assert break case castas catch class component continue default do does extends else final finally for function greater if imp import implements in include instanceof interface is less lock new package param property private public remote required return static switch than thread throw to transaction try var when while';
 
@@ -56,8 +59,8 @@ function BoxLangBrush() {
 		{ regex: new RegExp('#[^#]*#', 'g'),                             css: 'color2' },       // #variable# interpolation
 
 		// Strings (high priority to avoid keyword matches inside strings)
-		{ regex: regexLib.doubleQuotedString,           css: 'string' },       // double quoted strings
-		{ regex: regexLib.singleQuotedString,           css: 'string' },       // single quoted strings
+		{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,           css: 'string' },       // double quoted strings
+		{ regex: SyntaxHighlighter.regexLib.singleQuotedString,           css: 'string' },       // single quoted strings
 
 		// Built-in Functions
       	{
@@ -100,10 +103,13 @@ function BoxLangBrush() {
 		{ regex: new RegExp('(\\|\\||&&|\\?:|\\?\\.|\\?\\.)', 'g'),     css: 'color1' },      // logical operators
 		{ regex: new RegExp('(\\||&|\\^|~|<<|>>|>>>)', 'g'),            css: 'color1' }       // bitwise operators
     ];
-}
+  }
 
-BoxLangBrush.prototype = Object.create(Brush.prototype);
-BoxLangBrush.prototype.constructor = BoxLangBrush;
-BoxLangBrush.aliases = ['boxlang', 'bx'];
+  Brush.prototype = new SyntaxHighlighter.Highlighter();
+  Brush.aliases = [ 'boxlang', 'bx' ];
 
-export default BoxLangBrush;
+  SyntaxHighlighter.brushes.BoxLang = Brush;
+
+  // CommonJS
+  typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
+})();
