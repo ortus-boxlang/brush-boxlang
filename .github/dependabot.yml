@@ -11,8 +11,9 @@ updates:
     directory: "/"                  # Adjust if build.gradle is in a subfolder
     schedule:
       interval: "weekly"
-
+  
+  # NPM
   - package-ecosystem: "npm"
-    directory: "/frontend"  # adjust if needed
+    directory: "/"  # adjust if needed
     schedule:
       interval: "weekly"
