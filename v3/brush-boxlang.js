@@ -43,6 +43,10 @@
     // Access modifiers and type keywords
     var modifiers = 'public private remote package abstract final static required';
 
+    // Soft keywords: only significant as literal prefixes immediately followed by `{`
+    // e.g. set{1,2,3}, sb{"hello"}, stringbuilder{"hello"} - otherwise valid identifiers
+    var literalPrefixes = 'set sb stringbuilder';
+
     // Template syntax components (bx: prefixed)
     var templateComponents = 'argument function set return if else elseif try catch finally import while break continue include property rethrow throw switch case defaultcase output query';
 
@@ -79,7 +83,10 @@
        { regex: new RegExp('\\b(' + modifiers.replace(/\s+/g, '|') + ')\\b', 'gmi'),         css: 'color1' },       // access modifiers
 
 		// BoxLang Variable Scopes
-		{ regex: new RegExp('\\b(' + variableScopes.replace(/\s+/g, '|') + ')\\b', 'gmi'), css: 'color2' },
+		{ regex: new RegExp('\\b(' + variableScopes.replace(/\s+/g, '|') + ')\\b', 'gmi'), css: 'color7' },
+
+		// Soft-keyword literals: set{...}, sb{...}, stringbuilder{...}
+		{ regex: new RegExp('\\b(' + literalPrefixes.replace(/\s+/g, '|') + ')(?=\\s*\\{)', 'gmi'), css: 'keyword' },
 
 		// Numbers (after keywords to avoid conflicts)
 		{ regex: new RegExp('\\b\\d+\\.\\d+\\b', 'g'),                   css: 'value' },        // float literals
@@ -101,7 +108,8 @@
 		{ regex: new RegExp('(\\+\\+|--|\\+=|-=|\\*=|/=|%=|&=)', 'g'),  css: 'color1' },      // compound assignment
 		{ regex: new RegExp('(==|!=|<=|>=|<>|===|!==)', 'g'),           css: 'color1' },      // comparison operators
 		{ regex: new RegExp('(\\|\\||&&|\\?:|\\?\\.|\\?\\.)', 'g'),     css: 'color1' },      // logical operators
-		{ regex: new RegExp('(\\||&|\\^|~|<<|>>|>>>)', 'g'),            css: 'color1' }       // bitwise operators
+		{ regex: new RegExp('(\\||&|\\^|~|<<|>>|>>>)', 'g'),            css: 'color1' },      // bitwise operators
+		{ regex: new RegExp('(\\.\\.\\.|>\\.\\.<|>\\.\\.|\\.\\.<|\\.\\.)', 'g'), css: 'color1' } // spread (...) and range (.. ..< >.. >..<) operators
     ];
   }
 
