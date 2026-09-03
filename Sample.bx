@@ -134,4 +134,51 @@ class{
 
 	}
 
+	/**
+	 * Demonstrates newer BoxLang syntax additions, kept here for syntax highlighting coverage.
+	 */
+	function demoNewSyntax(){
+		// Range operators: inclusive, right-exclusive, left-exclusive, both-exclusive
+		var inclusive     = 1..5;
+		var rightExclusive = 1..<5;
+		var leftExclusive  = 1>..5;
+		var bothExclusive  = 1>..<5;
+
+		// Spread operator in array and struct literals, and function arguments
+		var baseArray  = [ 1, 2, 3 ];
+		var mergedArray = [ ...baseArray, 4, 5 ];
+		var baseStruct  = { a : 1, b : 2 };
+		var mergedStruct = { ...baseStruct, c : 3 };
+		var total = arraySum( ...mergedArray );
+
+		// Object and array destructuring, including rest bindings
+		var { a, b : renamed, ...rest } = mergedStruct;
+		var [ first, second, ...others ] = mergedArray;
+
+		// Set and StringBuilder literals
+		var mySet = set{ 1, 2, 3 };
+		var sb1    = sb{ "Hello " };
+		var sb2    = stringbuilder{ "World" };
+
+		// Two-variable for-in loops over arrays and structs
+		for( item, index in mergedArray ){
+			sb1.append( item & index );
+		}
+		for( key, value in mergedStruct ){
+			sb2.append( key & value );
+		}
+
+		// Assert with an optional message
+		assert mySet.len() > 0 : "mySet should not be empty";
+
+		// Local class declared inside a function body
+		class LocalHelper{
+			function greet(){
+				return "hi";
+			}
+		}
+
+		return new LocalHelper().greet();
+	}
+
 }

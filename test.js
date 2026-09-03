@@ -408,10 +408,61 @@ describe('brush-boxlang', function() {
       expectedScopes.forEach(function(scope) {
         expect(matches, `Should find "${scope}" scope in comprehensive example`).to.include(scope);
       });
-      
+
       // Should find multiple instances of commonly used scopes
       expect(matches.filter(m => m === 'local').length).to.be.above(5);
       expect(matches.filter(m => m === 'variables').length).to.be.above(1);
+    });
+  });
+
+  describe('BoxLang range and spread operators', function() {
+    it('can identify range and spread operator symbols', function() {
+      var regexList = instance.regexList;
+      var opRegex = regexList.find(rule =>
+        rule.css === 'color1' && rule.regex.toString().includes('\\.\\.\\.')
+      );
+      expect(opRegex).to.exist;
+
+      var cases = [
+        { code: '1..5', label: 'inclusive range' },
+        { code: '1..<5', label: 'right-exclusive range' },
+        { code: '1>..5', label: 'left-exclusive range' },
+        { code: '1>..<5', label: 'both-exclusive range' },
+        { code: '[...rest]', label: 'spread in array literal' },
+        { code: 'func(...args)', label: 'spread in function call' }
+      ];
+
+      cases.forEach(function(testCase) {
+        opRegex.regex.lastIndex = 0;
+        expect(opRegex.regex.test(testCase.code), `should match ${testCase.label} ("${testCase.code}")`).to.be.true;
+      });
+    });
+  });
+
+  describe('BoxLang set/sb/stringbuilder literal keywords', function() {
+    it('identifies set{}, sb{}, and stringbuilder{} as literal keywords', function() {
+      var regexList = instance.regexList;
+      var literalRegex = regexList.find(rule =>
+        rule.css === 'keyword' && rule.regex.toString().includes('stringbuilder')
+      );
+      expect(literalRegex).to.exist;
+
+      [ 'set{1,2,3}', 'sb{"hi"}', 'stringbuilder{"hi"}' ].forEach(function(code) {
+        literalRegex.regex.lastIndex = 0;
+        expect(literalRegex.regex.test(code), `"${code}" should match a literal keyword`).to.be.true;
+      });
+    });
+
+    it('does not treat set/sb/stringbuilder as keywords when used as plain identifiers', function() {
+      var regexList = instance.regexList;
+      var literalRegex = regexList.find(rule =>
+        rule.css === 'keyword' && rule.regex.toString().includes('stringbuilder')
+      );
+
+      [ 'set = 5;', 'var sb = getBuilder();', 'stringbuilder.append( "x" );' ].forEach(function(code) {
+        literalRegex.regex.lastIndex = 0;
+        expect(literalRegex.regex.test(code), `"${code}" should NOT match a literal keyword`).to.be.false;
+      });
     });
   });
 });
